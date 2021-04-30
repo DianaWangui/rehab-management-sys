@@ -1,0 +1,185 @@
+{% extends 'admin_layout.html' %}
+{% block content %}
+    <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Doctors</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="#">Information</a>
+            </li>
+            <li class="breadcrumb-item active">Overview</li>
+            <li>
+                <div class="container-fluid">
+                    <!-- Button trigger modal -->
+                     <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#newclientModal" style="margin-top: -40px;">
+                        <i class="mdi mdi-file-plus">New Doctor</i>
+                    </button>
+
+                    <div class="modal fade" id="newclientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Add a new doctor</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="#" method="POST" enctype="multipart/form-data">
+
+                                        <div class="form-group">
+                                            <label for="first_name">First Name</label>
+                                            <input required name="first_name" type="text" class="form-control" id="first_name" placeholder="enter doctor's first name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name</label>
+                                            <input required name="last_name" type="text" class="form-control" id="alast_name" placeholder="enter doctor's last name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input required name="username" type="text" class="form-control" id="username" placeholder="enter doctor's username">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input required name="phone" type="number" class="form-control" id="phone" placeholder="enter phone">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input required name="password" type="password" class="form-control" id="password" placeholder="enter password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="confirm_password">Confirm Password</label>
+                                            <input required name="confirm_password" type="password" class="form-control" id="confirm_password" placeholder="confirm password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="file">Doctor's Photo</label>
+                                              <input required type="file" name="file" id="file" accept="image/*,video/*,audio/*" capture multiple />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" class="form-control btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ol>
+{#    flash message#}
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <div class="alert alert-info">
+                <li>{{ message }}</li>
+              </div>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+{#         <div class="page-content-wrapper">#}
+                            <div class="row">
+                            {% for i in range(0,10) %}
+                                <div class="col-md-6 col-lg-6 col-xl-3">
+
+                                    <!-- Simple card -->
+                                    <div class="card m-b-30">
+                                        <img class="card-img-top img-fluid" src="/static/ribiro.JPG" alt="Card image cap">
+                                        <div class="card-body">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th><i></i>Doctors Name</th>
+                                                    <th>
+                                                        <div style="display: inline-block">
+                                                            <button class="btn-info" data-toggle="modal" data-target="#modalid"><i class="mdi mdi-pen"></i></button>
+                                                            <!-- The Modal -->
+                                                            <div class="modal fade" id="modalid">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+
+                                                                        <!-- Modal Header -->
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Update doctor's info!</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+
+                                                                        <!-- Modal body -->
+                                                                        <div class="modal-body">
+                                                                            <form action="#" method="post">
+
+                                                                                <div class="form-group">
+                                                                                    <label for="username">Username</label>
+                                                                                    <input required name="username" type="text" class="form-control" id="username" placeholder="enter doctor's username">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="phone">Phone</label>
+                                                                                    <input required name="phone" type="number" class="form-control" id="phone" placeholder="enter phone">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="file">Doctor's Photo</label>
+                                                                                      <input required type="file" name="file" id="file" accept="image/*,video/*,audio/*" capture multiple />
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <input type="submit" class="form-control btn btn-primary">
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <button class="btn-danger" data-toggle="modal" data-target="#modaldelete"><i class="mdi mdi-delete-empty"></i></button>
+                                                            <!-- The Modal -->
+                                                            <div class="modal fade" id="modaldelete">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+
+                                                                        <!-- Modal Header -->
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Delete doctor?</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <a href="">
+                                                                                <button class="btn-danger">Delete</button>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <table class="table mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-phone"></i> Phone</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="ion-ios7-email"></i> email</td>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div><!-- end col -->
+                            {% endfor %}
+                            </div>
+{% endblock %}
