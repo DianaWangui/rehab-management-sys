@@ -6,6 +6,7 @@ from functools import wraps
 app = Flask(__name__)
 
 app.config.from_object(Development)
+
 # app.config.from_object(Production)
 
 db = SQLAlchemy(app)
@@ -20,11 +21,13 @@ from models.Medications import MedicationsModel
 
 
 # create tables in our database
+
 @app.before_first_request
 def create_tables():
     db.create_all()
 
 # set session
+
 @app.before_request
 def setg():
     g.user = None
@@ -41,6 +44,7 @@ def setg():
 
 
 # create the login required decorator
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -51,6 +55,7 @@ def login_required(f):
 
 
 # login used applies to everyone including admin
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -67,6 +72,7 @@ def login():
 
 
 # register admin
+
 @app.route('/register_admin', methods=['POST', 'GET'])
 def register_admin():
     if request.method == 'POST':
@@ -97,6 +103,7 @@ def register_admin():
 
 
 # recover admin password
+
 @app.route('/recover_admin_password')
 def recover_admin_password():
     return render_template('forgot.html')
